@@ -42,7 +42,9 @@
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->parent_id ?? 'N/A' }}</td>
                     <td>{{ $category->created_at }}</td>
-                    <td>{{ $category->iamge ?? 'none' }}</td>
+                    <td>
+                        <img src="{{ asset('storage/' . $category->image) }}" alt="image" height="30">
+                    </td>
                     <td class="d-flex">
                         <a href="{{ route('dashboard.categories.edit', $category->id) }}"
                             class="btn btn-sm btn-outline-primary mr-2">
