@@ -33,11 +33,10 @@ class CategoriesController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $request->merge([
-            'slug' => Str::slug($request->post('name'))
-        ]);
-
         $formData = $request->validated();
+
+
+        $formData['slug'] = Str::slug($request->post('name'));
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads', ['disk' => 'public']); //request->file('image') uploadedFile Object
