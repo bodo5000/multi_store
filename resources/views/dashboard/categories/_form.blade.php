@@ -8,14 +8,8 @@
         </ul>
     </div>
 @endif
-<div class="form-group">
-    <label for="category_name">category name</label>
-    <input id="category_name" type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-        value="{{ $category->name ?? old('name') }}">
-    @error('name')
-        <p class="text-danger">{{ $message }}</p>
-    @enderror
-</div>
+
+<x-form.input type="text" name="name" :value="$category->name" label="category name" />
 
 <div class="form-group">
     <label for="category_parent">category parent</label>

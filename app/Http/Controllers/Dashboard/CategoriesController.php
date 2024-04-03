@@ -17,7 +17,17 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('dashboard.categories.index', ['categories' => Category::all()]);
+        $request = request();
+        $query = Category::query();
+        if ($name = $request->query('name')) {
+            $query->where('name', 'LIKE', "%{$name}%");
+        }
+
+        if ($status = $request->query('status')) {
+            $query->whereStatus($status);
+        }
+
+        return view('dashboard.categories.index', ['categories' => $query->paginate(1)]);
     }
 
     /**
@@ -25,7 +35,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('dashboard.categories.create', ['parents' => Category::all()]);
+        return view('dashboard.categories.create', ['parents' => Category::all(), 'category' => new Category()]);
     }
 
     /**
@@ -61,7 +71,7 @@ class CategoriesController extends Controller
     {
         $category = Category::find($id);
         if (!$category)
-            return redirect(route('dashboard.categories.index'))->with('error', 'no category found');
+            return redirect(route('dashboard.categories.index'))->with('danger', 'no category found');
 
 
         // SELECT * FROM categories WHERE id <> $id AND (parent_id IS NULL OR parent_id <> $id)
@@ -82,7 +92,7 @@ class CategoriesController extends Controller
         $category = Category::find($id);
 
         if (!$category) {
-            return redirect(route('dashboard.categories.index'))->with('error', 'no category found');
+            return redirect(route('dashboard.categories.index'))->with('danger', 'no category found');
         }
 
         $old_image = $category->image;
@@ -99,7 +109,7 @@ class CategoriesController extends Controller
             Storage::disk('public')->delete($old_image);
         }
 
-        return redirect(route('dashboard.categories.index'))->with('success', 'category has been updated');
+        return redirect(route('dashboard.categories.index'))->with('info', 'category has been updated');
     }
 
     /**
@@ -114,6 +124,6 @@ class CategoriesController extends Controller
             Storage::disk('public')->delete($category->image);
         }
         // Category::destroy($id);
-        return redirect(route('dashboard.categories.index'))->with('success', 'category has been deleted');
+        return redirect(route('dashboard.categories.index'))->with('warning', 'category has been deleted');
     }
 }
