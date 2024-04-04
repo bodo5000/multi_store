@@ -26,7 +26,7 @@ class CategoriesController extends Controller
                 ])
                 ->filterBy_name_status(request()->query())
                 ->orderBy('categories.name')
-                ->paginate(1)
+                ->paginate(3)
         ]);
     }
 
@@ -61,7 +61,7 @@ class CategoriesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -115,15 +115,41 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        $category = Category::findOrFail($id);
         $category->delete();
+        // Category::destroy($id);
+        return redirect(route('dashboard.categories.index'))->with('warning', 'category has been deleted');
+    }
 
+    public function trash()
+    {
+        return view('dashboard.categories.trash', ['categories' => Category::onlyTrashed()->paginate(3)]);
+    }
+
+    public function restore(string $id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+
+        if (!$category) {
+            return to_route('dashboard.categories.trash')->with('danger', 'category not found');
+        }
+
+        $category->restore();
+        return redirect(route('dashboard.categories.trash'))->with('success', 'category Restored');
+    }
+
+    public function forceDelete(string $id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+        if (!$category) {
+            return to_route('dashboard.categories.trash')->with('danger', 'category not found');
+        }
+
+        $category->forceDelete();
         if ($category->image) {
             Storage::disk('public')->delete($category->image);
         }
-        // Category::destroy($id);
-        return redirect(route('dashboard.categories.index'))->with('warning', 'category has been deleted');
+        return to_route('dashboard.categories.trash')->with('warning', 'category has been permanent deleted');
     }
 }

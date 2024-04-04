@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.index')
 
 @section('header_conent')
-    <x-header main_title='categories' main_page='categories' page='home' />
+    <x-header main_title='categories' main_page='categories' page='trashed' />
 @endsection
 
 
@@ -18,12 +18,8 @@
     @endif
 
     <div class="mb-5">
-        <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-outline-success">
-            Create Category
-        </a>
-
-        <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-info">
-            trashed categories
+        <a href="{{ route('dashboard.categories.index') }}" class="btn btn-sm btn-outline-success">
+            return to categories
         </a>
     </div>
 
@@ -65,12 +61,15 @@
                         <img src="{{ asset('storage/' . $category->image) }}" alt="image" height="30">
                     </td>
                     <td class="d-flex">
-                        <a href="{{ route('dashboard.categories.edit', $category->id) }}"
-                            class="btn btn-sm btn-outline-primary mr-2">
-                            Edit
-                        </a>
 
-                        <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="POST">
+                        <form class="mx-2" action="{{ route('dashboard.categories.restore', $category->id) }}"
+                            method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn btn-sm btn-outline-success">restore</button>
+                        </form>
+
+                        <form action="{{ route('dashboard.categories.force-delete', $category->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
