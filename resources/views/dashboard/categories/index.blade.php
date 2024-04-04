@@ -24,7 +24,8 @@
     </div>
 
     <form action="{{ URL::current() }}" method="GET" class="d-flex justify-content-between mb-4">
-        <input type="text" name="name" placeholder="name" class="form-control mx-2" value="{{ request('name') }}">
+        <input type="text" name="name" placeholder="serch by category name" class="form-control mx-2"
+            value="{{ request('name') }}">
         <select name="status" id="" class="form-control mx-2">
             <option value="">All</option>
             <option value="active" @selected(request('status') == 'active')>Active</option>
@@ -52,7 +53,7 @@
                 <tr>
                     <td>{{ ++$index }}</td>
                     <td>{{ $category->name }}</td>
-                    <td>{{ $category->parent_id ?? 'N/A' }}</td>
+                    <td>{{ $category->parent_name ?? 'N/A' }}</td>
                     <td class="badge {{ $category->status == 'active' ? 'bg-green' : 'bg-danger' }}">{{ $category->status }}
                     </td>
                     <td>{{ $category->created_at }}</td>

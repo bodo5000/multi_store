@@ -17,17 +17,17 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $request = request();
-        $query = Category::query();
-        if ($name = $request->query('name')) {
-            $query->where('name', 'LIKE', "%{$name}%");
-        }
-
-        if ($status = $request->query('status')) {
-            $query->whereStatus($status);
-        }
-
-        return view('dashboard.categories.index', ['categories' => $query->paginate(1)]);
+        return view('dashboard.categories.index', [
+            // SELECT categories.* , parents.name as parent_name FROM categories as a LEFT JOIN categories as parents ON parents.id = categories.parent_id
+            'categories' => Category::leftJoin('categories as parents', 'parents.id', '=', 'categories.parent_id')
+                ->select([
+                    'categories.*',
+                    'parents.name as parent_name'
+                ])
+                ->filterBy_name_status(request()->query())
+                ->orderBy('categories.name')
+                ->paginate(1)
+        ]);
     }
 
     /**
