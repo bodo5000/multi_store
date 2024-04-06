@@ -45,6 +45,7 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Parent</th>
+                <th>products number</th>
                 <th>status</th>
                 <th>created_at</th>
                 <th>Image</th>
@@ -56,9 +57,11 @@
             @forelse ($categories as $index => $category)
                 <tr>
                     <td>{{ ++$index }}</td>
-                    <td>{{ $category->name }}</td>
+                    <td><a href="{{ route('dashboard.categories.show', $category) }}">{{ $category->name }}</a></td>
                     <td>{{ $category->parent_name ?? 'N/A' }}</td>
-                    <td class="badge {{ $category->status == 'active' ? 'bg-green' : 'bg-danger' }}">{{ $category->status }}
+                    <td>{{ $category->products_count }}</td>
+                    <td class="badge {{ $category->status == 'active' ? 'bg-green' : 'bg-danger' }}">
+                        {{ $category->status }}
                     </td>
                     <td>{{ $category->created_at }}</td>
                     <td>
@@ -79,7 +82,7 @@
                 </tr>
             @empty
                 <tr class="text-center">
-                    <td colspan="6">there is no categories yet</td>
+                    <td colspan="8">there is no categories yet</td>
                 </tr>
             @endforelse
         </tbody>

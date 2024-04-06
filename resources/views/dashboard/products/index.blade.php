@@ -54,8 +54,8 @@
                 <tr>
                     <td>{{ ++$index }}</td>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->category_name ?? 'N/A' }}</td>
-                    <td>{{ $product->store_name ?? 'N/A' }}</td>
+                    <td>{{ $product->category->name ?? 'N/A' }}</td>
+                    <td>{{ $product->store->name ?? 'N/A' }}</td>
                     <td class="badge {{ $product->status == 'active' ? 'bg-green' : 'bg-danger' }}">{{ $product->status }}
                     </td>
                     <td>{{ $product->created_at }}</td>

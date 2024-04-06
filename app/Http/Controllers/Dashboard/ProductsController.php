@@ -13,7 +13,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('dashboard.products.index', ['products' => Product::paginate()]);
+        // SELECT * FROM products
+        // SELECT * FROM categories WHERE  id IN (...)
+        // SELECT * FROM products WHERE  id IN (...)
+        return view('dashboard.products.index', ['products' => Product::with(['category', 'store'])->paginate()]);
     }
 
     /**

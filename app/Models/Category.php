@@ -13,6 +13,11 @@ class Category extends Model
 
     protected $fillable = ['name', 'parent_id', 'description', 'image', 'status', 'slug'];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
+
     public function scopeFilterBy_name_status(Builder $query, array $filters)
     {
         $query->when($filters['name'] ?? false, function (Builder $builder, $value) {

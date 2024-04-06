@@ -24,6 +24,8 @@ class CategoriesController extends Controller
                     'categories.*',
                     'parents.name as parent_name'
                 ])
+                // ->selectRaw('(SELECT count(*) FROM products WHERE category_id = categories.id) AS products_count')
+                ->withCount('products')
                 ->filterBy_name_status(request()->query())
                 ->orderBy('categories.name')
                 ->paginate(3)
@@ -59,9 +61,9 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Category $category)
     {
-        return abort(404);
+        return view('dashboard.categories.show', ['category' => $category]);
     }
 
     /**
