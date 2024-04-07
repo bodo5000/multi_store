@@ -1,9 +1,15 @@
-@props(['type', 'name', 'value', 'label'])
-<div {{ $attributes->merge(['class' => 'form-group']) }}>
-    <label for="category_name">{{ $label }}</label>
-    <input id="category_name" type="{{ $type }}" name="{{ $name }}"
-        class="form-control @error('name') is-invalid @enderror" value="{{ $value ?? old('name') }}">
-    @error($name)
-        <p class="text-danger">{{ $message }}</p>
-    @enderror
-</div>
+@props([
+    'type' => 'text',
+    'name',
+    'value' => '',
+    'label' => false,
+])
+
+@if ($label)
+    <label for="">{{ $label }}</label>
+@endif
+
+<input type="{{ $type }}" name="{{ $name }}" value="{{ old($name, $value) }}"
+    {{ $attributes->class(['form-control', 'is-invalid' => $errors->has($name)]) }}>
+
+<x-form.validation-feedback :name="$name" />
