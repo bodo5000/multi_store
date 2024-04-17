@@ -46,8 +46,6 @@ class CategoriesController extends Controller
     public function store(CategoryRequest $request)
     {
         $formData = $request->validated();
-
-
         $formData['slug'] = Str::slug($request->post('name'));
 
         if ($request->hasFile('image')) {
@@ -126,7 +124,7 @@ class CategoriesController extends Controller
 
     public function trash()
     {
-        return view('dashboard.categories.trash', ['categories' => Category::onlyTrashed()->paginate(3)]);
+        return view('dashboard.categories.trash', ['categories' => Category::onlyTrashed()->filterBy_name_status(request()->query())->paginate(3)]);
     }
 
     public function restore(string $id)

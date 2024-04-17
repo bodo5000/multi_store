@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.index')
 
 @section('header_conent')
-    <x-header main_title='categories' main_page='categories' page='{{ $category->name }}' />
+    <x-header main_title="category name: {{ $category->name }}" main_page='categories' page='category_info' />
 @endsection
 
 @section('contnet')
