@@ -15,7 +15,7 @@
     <div class="product-info">
         <span class="category">{{ $product->category->name }}</span>
         <h4 class="title">
-            <a href="#">{{ $product->name }}</a>
+            <a href="{{ route('front.products.show', $product) }}">{{ $product->name }}</a>
         </h4>
         <ul class="review">
             @for ($i = 1; $i <= 5; $i++)
@@ -24,9 +24,9 @@
             <li><span>{{ $product->rating }} Review(s)</span></li>
         </ul>
         <div class="price">
-            <span>{{ $product->price }}</span>
+            <span>{{ Currency::format($product->price, 'EURO') }}</span>
             @if ($product->compare_price)
-                <span class="discount-price">{{ $product->compare_price }}</span>
+                <span class="discount-price">{{ Currency::format($product->compare_price) }}</span>
             @endif
         </div>
     </div>
