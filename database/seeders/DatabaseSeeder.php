@@ -19,26 +19,26 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        //     'password' => Hash::make('password'),
-        //     'phone_number' => '01096379831'
-        // ]);
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => Hash::make('password'),
+            'phone_number' => '01096379831'
+        ]);
 
-        // User::factory()->create([
-        //     'name' => 'UserOne',
-        //     'email' => 'userOne@example.com',
-        //     'password' => Hash::make('password'),
-        //     'phone_number' => '01096379833'
-        // ]);
+        User::factory()->create([
+            'name' => 'UserOne',
+            'email' => 'userOne@example.com',
+            'password' => Hash::make('password'),
+            'phone_number' => '01096379833'
+        ]);
 
-        // User::factory()->create([
-        //     'name' => 'userTwo',
-        //     'email' => 'userTwo@example.com',
-        //     'password' => Hash::make('password'),
-        //     'phone_number' => '01096379832'
-        // ]);
+        User::factory()->create([
+            'name' => 'userTwo',
+            'email' => 'userTwo@example.com',
+            'password' => Hash::make('password'),
+            'phone_number' => '01096379832'
+        ]);
 
         Store::factory(5)->create();
         Category::factory(10)->create();

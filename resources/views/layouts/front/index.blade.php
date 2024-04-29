@@ -47,9 +47,9 @@
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-left">
                             <ul class="menu-top-link">
-                                {{-- <li>
+                                <li>
                                     <div class="select-position">
-                                        <form action="{{ route('currency.store') }}" method="post">
+                                        <form action="" method="post">
                                             @csrf
                                             <select name="currency_code" onchange="this.form.submit()">
                                                 <option value="USD" @selected('USD' == session('currency_code'))>$ USD</option>
@@ -61,19 +61,19 @@
                                             </select>
                                         </form>
                                     </div>
-                                </li> --}}
-                                {{-- <li>
+                                </li>
+                                <li>
                                     <div class="select-position">
                                         <form action="{{ URL::current() }}" method="get">
                                             <select name="locale" onchange="this.form.submit()">
-                                                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                {{-- @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                                     <option value="{{ $localeCode }}" @selected($localeCode == App::currentLocale())>
                                                         {{ $properties['native'] }}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </form>
                                     </div>
-                                </li> --}}
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -171,15 +171,15 @@
                                     <span>(+100) 123 456 7890</span>
                                 </h3>
                             </div>
-                            {{-- <div class="navbar-cart">
+                            <div class="navbar-cart">
                                 <div class="wishlist">
                                     <a href="javascript:void(0)">
                                         <i class="lni lni-heart"></i>
                                         <span class="total-items">0</span>
                                     </a>
                                 </div>
-                                <x-cart-menu />
-                            </div> --}}
+                                <x-cart.cart-menu />
+                            </div>
                         </div>
                     </div>
                 </div>

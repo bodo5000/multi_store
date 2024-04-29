@@ -67,7 +67,7 @@ class ProductsController extends Controller
 
         $saved_tags = Tag::all();
 
-        foreach ($tags as $item) {
+        foreach ($tags ?? [] as $item) {
             $slug = Str::slug($item->value);
             $tag = $saved_tags->where('slug', $slug)->first();   // query on collection not on db
             if (!$tag) {

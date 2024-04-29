@@ -51,7 +51,7 @@
                                 @endif
                             </h3>
                             <p class="info-text">{{ $product->description }}</p>
-                            <form action="#" method="post">
+                            <form action="{{ route('cart.store') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <div class="row">
