@@ -1,4 +1,4 @@
-<x-layouts.frontlayout title="homePage">
+<x-Layouts.FrontLayout title="homePage">
 
     <!-- Start Hero Area -->
     <section class="hero-area">
@@ -825,4 +825,4 @@
             setInterval(timer, 1000);
         </script>
     @endpush
-</x-layouts.frontlayout>
+</x-Layouts.FrontLayout>

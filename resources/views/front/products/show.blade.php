@@ -1,4 +1,4 @@
-<x-layouts.frontlayout title="product">
+<x-Layouts.FrontLayout title="product">
     <x-slot:breadcrumb>
         <div class="breadcrumbs">
             <div class="container">
@@ -370,4 +370,4 @@
         </script>
     @endpush
 
-</x-layouts.frontlayout>
+</x-Layouts.FrontLayout>

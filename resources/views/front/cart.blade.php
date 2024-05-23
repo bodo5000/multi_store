@@ -1,4 +1,4 @@
-<x-layouts.frontlayout title="Cart">
+<x-Layouts.FrontLayout title="Cart">
 
     <x-slot:breadcrumb>
         <div class="breadcrumbs">
@@ -136,4 +136,4 @@
         {{-- <script src="{{ asset('js/cart.js') }}"></script> --}}
     @endpush
     @vite(['resources/js/cart.js'])
-</x-layouts.frontlayout>
+</x-Layouts.FrontLayout>

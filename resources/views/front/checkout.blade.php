@@ -1,4 +1,4 @@
-<x-layouts.frontlayout title="Checkout">
+<x-Layouts.FrontLayout title="Checkout">
     <x-slot:breadcrumb>
         <div class="breadcrumbs">
             <div class="container">
@@ -345,4 +345,4 @@
             </div>
         </div>
     </section>
-</x-layouts.frontlayout>
+</x-Layouts.FrontLayout>
