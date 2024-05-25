@@ -64,7 +64,7 @@ class Product extends Model
         return round(100 - (100 * $this->price / $this->compare_price));
     }
 
-    public static function booted()
+    protected static function booted()
     {
         // static::addGlobalScope('store', new ProductScope());
         static::addGlobalScope(ProductScope::class);

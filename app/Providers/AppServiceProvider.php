@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+
+use App\Listeners\DeductProductQuantity;
+use App\Listeners\EmptyCart;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +28,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+
+        Event::listen('order.created', DeductProductQuantity::class);
+        Event::listen('order.created', EmptyCart::class);
     }
 }

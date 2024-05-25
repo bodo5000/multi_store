@@ -60,8 +60,11 @@ class CheckoutController extends Controller
                     $order->addresses()->create($address);
                 }
             }
-            $this->cart->empty();
+            // $this->cart->empty();
             DB::commit();
+
+            event('order.created');
+
         } catch (\Throwable $e) {
             DB::rollBack();
             throw $e;
