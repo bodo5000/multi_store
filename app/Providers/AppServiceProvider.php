@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 
+use App\Events\OrderCreated;
 use App\Listeners\DeductProductQuantity;
 use App\Listeners\EmptyCart;
 use Illuminate\Foundation\AliasLoader;
@@ -29,7 +30,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
-        Event::listen('order.created', DeductProductQuantity::class);
-        Event::listen('order.created', EmptyCart::class);
+        // Event::listen('order.created', DeductProductQuantity::class);
+        // Event::listen('order.created', EmptyCart::class);
+
+        Event::listen(OrderCreated::class, DeductProductQuantity::class);
+        Event::listen(OrderCreated::class, EmptyCart::class);
     }
 }

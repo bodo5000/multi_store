@@ -2,7 +2,9 @@
 
 namespace App\Listeners;
 
+use App\Events\OrderCreated;
 use App\Facades\Cart;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -21,14 +23,18 @@ class DeductProductQuantity
     /**
      * Handle the event.
      */
-    public function handle(): void
+    public function handle(OrderCreated $event): void
     {
-        foreach (Cart::get() as $item) {
-            Product::where('id', $item->product_id)
-                ->update([
-                    //                    UPDATE products SET quantity = quantity - 1
-                    'quantity' => DB::raw("quantity - {$item->quantity}")
-                ]);
+        $order = $event->order;
+        foreach ($order->products as $product) {
+            $product->decrement('quantity', $product->order_item->quantity);
+
+
+            // Product::where('id', $item->product_id)
+            //     ->update([
+            //         //                    UPDATE products SET quantity = quantity - 1
+            //         'quantity' => DB::raw("quantity - {$item->quantity}")
+            //     ]);
         }
     }
 }

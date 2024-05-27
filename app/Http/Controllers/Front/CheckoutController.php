@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\OrderCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -63,7 +64,8 @@ class CheckoutController extends Controller
             // $this->cart->empty();
             DB::commit();
 
-            event('order.created');
+            // event('order.created', $order, auth()->user());
+            event(new OrderCreated($order));
 
         } catch (\Throwable $e) {
             DB::rollBack();
