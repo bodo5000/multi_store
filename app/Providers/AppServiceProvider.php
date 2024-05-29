@@ -6,6 +6,7 @@ namespace App\Providers;
 use App\Events\OrderCreated;
 use App\Listeners\DeductProductQuantity;
 use App\Listeners\EmptyCart;
+use App\Listeners\SendOrderCreatedNotification;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Event;
@@ -34,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
         // Event::listen('order.created', EmptyCart::class);
 
         Event::listen(OrderCreated::class, DeductProductQuantity::class);
+        Event::listen(OrderCreated::class, SendOrderCreatedNotification::class);
         Event::listen(OrderCreated::class, EmptyCart::class);
     }
 }

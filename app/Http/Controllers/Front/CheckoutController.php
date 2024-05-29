@@ -35,6 +35,11 @@ class CheckoutController extends Controller
             'addr.billing.email' => ['required', 'string', 'max:255'],
             'addr.billing.phone_number' => ['required', 'string', 'max:255'],
             'addr.billing.city' => ['required', 'string', 'max:255'],
+            'addr.shipping.first_name' => ['required', 'string', 'max:255'],
+            'addr.shipping.last_name' => ['required', 'string', 'max:255'],
+            'addr.shipping.email' => ['required', 'string', 'max:255'],
+            'addr.shipping.phone_number' => ['required', 'string', 'max:255'],
+            'addr.shipping.city' => ['required', 'string', 'max:255'],
         ]);
         $items = $this->cart->get()->groupBy('product.store_id')->all();
 
