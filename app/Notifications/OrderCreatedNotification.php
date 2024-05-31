@@ -15,7 +15,9 @@ class OrderCreatedNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(protected Order $order)
+    protected $order;
+
+    public function __construct(Order $order)
     {
         $this->order = $order;
     }
@@ -27,7 +29,7 @@ class OrderCreatedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail', 'database', 'broadcast'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -46,6 +48,17 @@ class OrderCreatedNotification extends Notification
             ->line('Thank you for using our application!'); // paragraph
     }
 
+    public function toDatabase(object $notifiable)
+    {
+        $addr = $this->order->billingAddress;
+
+        return [
+            'message' => "A new Order ({$this->order->number}) has been created by {$addr->name} from {$addr->country_name}",
+            'icon' => 'fas fa-file',
+            'url' => url('/dashboard'),
+            'order_id' => $this->order->id
+        ];
+    }
     /**
      * Get the array representation of the notification.
      *

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\MarkNotificationAsReaded;
 use App\Http\Middleware\UserLastActiveAt;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,7 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->web(append: [
-            UserLastActiveAt::class
+            UserLastActiveAt::class,
+            MarkNotificationAsReaded::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
