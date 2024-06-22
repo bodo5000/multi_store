@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\Auth\TwoFactorAuthController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\Front\HomeController;
@@ -15,6 +16,7 @@ Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout')
 Route::post('/checkout', [CheckoutController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
+    Route::get('auth/user/2fa', [TwoFactorAuthController::class, 'index'])->name('front.2fa');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

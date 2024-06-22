@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group([
-    'middleware' => ['auth', 'verified', 'auth.type:super-admin,admin'],
-    'prefix' => 'dashboard',
+    'middleware' => ['auth:admin', 'verified'],
+    'prefix' => 'admin/dashboard',
     'as' => 'dashboard.'
 ], function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

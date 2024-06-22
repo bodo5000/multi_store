@@ -17,9 +17,9 @@
         @csrf
         @method('PATCH')
 
-        <x-form.input class="mb-2" type="text" name="first_name" :value="$user->profile->first_name" label="first_name" />
-        <x-form.input class="mb-2" type="text" name="last_name" :value="$user->profile->last_name" label="last_name" />
-        <x-form.input class="mb-2" type="date" name="birthday" :value="$user->profile->birthday" label="birthday" />
+        <x-form.input class="mb-2" type="text" name="first_name" :value="$user->profile->first_name ?? ''" label="first_name" />
+        <x-form.input class="mb-2" type="text" name="last_name" :value="$user->profile->last_name ?? ''" label="last_name" />
+        <x-form.input class="mb-2" type="date" name="birthday" :value="$user->profile->birthday ?? ''" label="birthday" />
 
         <div class="form-group mb-2">
             <label for="exampleRadios1">gender</label>
@@ -43,12 +43,12 @@
             @enderror
         </div>
 
-        <x-form.input class="mb-2" type="text" name="street_address" :value="$user->profile->street_address" label="street_address" />
-        <x-form.input class="mb-2" type="text" name="city" :value="$user->profile->city" label="city" />
-        <x-form.input class="mb-2" type="text" name="state" :value="$user->profile->state" label="state" />
-        <x-form.input class="mb-2" type="text" name="postal_code" :value="$user->profile->postal_code" label="postal_code" />
-        <x-form.select class="mb-2" name="country" :options="$countries" label="Country" :selected="$user->profile->country" />
-        <x-form.select class="mb-2" name="locale" :options="$locales" label="Locale" :selected="$user->profile->locale" />
+        <x-form.input class="mb-2" type="text" name="street_address" :value="$user->profile->street_address ?? ''" label="street_address" />
+        <x-form.input class="mb-2" type="text" name="city" :value="$user->profile->city ?? ''" label="city" />
+        <x-form.input class="mb-2" type="text" name="state" :value="$user->profile->state ?? ''" label="state" />
+        <x-form.input class="mb-2" type="text" name="postal_code" :value="$user->profile->postal_code ?? ''" label="postal_code" />
+        <x-form.select class="mb-2" name="country" :options="$countries" label="Country" :selected="$user->profile->country ?? ''" />
+        <x-form.select class="mb-2" name="locale" :options="$locales" label="Locale" :selected="$user->profile->locale ?? ''" />
 
         <button type="submit" class="btn btn-sm btn-success my-2">update</button>
     </form>

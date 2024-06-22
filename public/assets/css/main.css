@@ -1454,6 +1454,10 @@ ol {
   /* End Main Menu Search */
 }
 
+.topbar .container{
+    display: block !important;
+}
+
 .header .topbar {
   background-color: #081828;
   padding: 18px 0;
