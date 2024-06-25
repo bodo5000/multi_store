@@ -8,6 +8,7 @@ use App\Listeners\DeductProductQuantity;
 use App\Listeners\EmptyCart;
 use App\Listeners\SendOrderCreatedNotification;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -33,9 +34,10 @@ class AppServiceProvider extends ServiceProvider
 
         // Event::listen('order.created', DeductProductQuantity::class);
         // Event::listen('order.created', EmptyCart::class);
-
         // Event::listen(OrderCreated::class, DeductProductQuantity::class);
         // Event::listen(OrderCreated::class, SendOrderCreatedNotification::class);
+
         Event::listen(OrderCreated::class, EmptyCart::class);
+        JsonResource::withoutWrapping();
     }
 }
