@@ -66,6 +66,10 @@
                                     <div class="select-position">
                                         <form action="{{ URL::current() }}" method="get">
                                             <select name="locale" onchange="this.form.submit()">
+                                                <option value="" selected>chose lang</option>
+                                                <option value="en">english</option>
+                                                <option value="ar">arabic</option>
+                                                <option value="fr">france</option>
                                                 {{-- @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                                     <option value="{{ $localeCode }}" @selected($localeCode == App::currentLocale())>
                                                         {{ $properties['native'] }}</option>
@@ -107,7 +111,7 @@
                             @else
                                 <div class="user">
                                     <i class="lni lni-user"></i>
-                                    {{ __('Hello') }}
+                                    {{ __('hello') }}
                                 </div>
                                 <ul class="user-login">
                                     <li>

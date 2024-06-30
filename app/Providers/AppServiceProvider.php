@@ -10,6 +10,7 @@ use App\Listeners\SendOrderCreatedNotification;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,13 +32,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+        Event::listen(OrderCreated::class, EmptyCart::class);
+        JsonResource::withoutWrapping();
+
+        // App::setLocale(request('locale', 'en'));
 
         // Event::listen('order.created', DeductProductQuantity::class);
         // Event::listen('order.created', EmptyCart::class);
         // Event::listen(OrderCreated::class, DeductProductQuantity::class);
         // Event::listen(OrderCreated::class, SendOrderCreatedNotification::class);
-
-        Event::listen(OrderCreated::class, EmptyCart::class);
-        JsonResource::withoutWrapping();
     }
 }
