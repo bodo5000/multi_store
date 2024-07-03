@@ -7,11 +7,14 @@ use App\Events\OrderCreated;
 use App\Listeners\DeductProductQuantity;
 use App\Listeners\EmptyCart;
 use App\Listeners\SendOrderCreatedNotification;
+use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
         //Adding Aliases
         $loader = AliasLoader::getInstance();
         $loader->alias('Currency', \App\Helpers\Currency::class);
+
+        $this->app->bind('abilities', function () {
+            return include base_path('data/abilities.php');
+        });
     }
 
     /**
@@ -35,6 +42,12 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(OrderCreated::class, EmptyCart::class);
         JsonResource::withoutWrapping();
 
+        foreach ($this->app->make('abilities') as $code => $label) {
+            Gate::define($code, function (User|Admin $user) use ($code) {
+                return $user->hasAbility($code);
+            });
+
+        }
         // App::setLocale(request('locale', 'en'));
 
         // Event::listen('order.created', DeductProductQuantity::class);

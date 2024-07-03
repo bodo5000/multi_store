@@ -18,9 +18,11 @@
     @endif
 
     <div class="mb-5">
-        <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-outline-success">
-            Create Category
-        </a>
+        @can('categories.create')
+            <a href="{{ route('dashboard.categories.create') }}" class="btn btn-sm btn-outline-success">
+                Create Category
+            </a>
+        @endcan
 
         <a href="{{ route('dashboard.categories.trash') }}" class="btn btn-sm btn-outline-info">
             trashed categories
@@ -68,15 +70,20 @@
                         <img src="{{ asset('storage/' . $category->image) }}" alt="image" height="30">
                     </td>
                     <td class="d-flex">
-                        <a href="{{ route('dashboard.categories.edit', $category->id) }}"
-                            class="btn btn-sm btn-outline-primary mr-2">
-                            Edit
-                        </a>
+                        @can('categories.update')
+                            <a href="{{ route('dashboard.categories.edit', $category->id) }}"
+                                class="btn btn-sm btn-outline-primary mr-2">
+                                Edit
+                            </a>
+                        @endcan
 
                         <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+
+                            @can('categories.delete')
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            @endcan
                         </form>
                     </td>
                 </tr>
