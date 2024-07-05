@@ -6,6 +6,12 @@
 
 
 @section('contnet')
+    <div class="mb-5">
+        <a href="{{ route('dashboard.categories.index') }}" class="btn btn-sm btn-outline-success">
+            return to categories
+        </a>
+    </div>
+
     <x-alert type="success" />
     <x-alert type="danger" />
     <x-alert type="info" />
@@ -17,11 +23,6 @@
         </div>
     @endif
 
-    <div class="mb-5">
-        <a href="{{ route('dashboard.categories.index') }}" class="btn btn-sm btn-outline-success">
-            return to categories
-        </a>
-    </div>
 
     <form action="{{ URL::current() }}" method="GET" class="d-flex justify-content-between mb-4">
         <input type="text" name="name" placeholder="serch by category name" class="form-control mx-2"
