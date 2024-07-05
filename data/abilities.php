@@ -19,5 +19,12 @@ return [
     'roles.view' => 'View roles',
     'roles.create' => 'Create roles',
     'roles.update' => 'Update roles',
-    'roles.delete' => 'Delete roles'
+    'roles.delete' => 'Delete roles',
+    'roles.restore' => 'Restore roles',
+    'roles.force-Delete' => 'ForceDelete roles',
+
+    'admins.view' => 'View admins',
+    'admins.create' => 'Create admins',
+    'admins.update' => 'Update admins',
+    'admins.delete' => 'Delete admins'
 ];

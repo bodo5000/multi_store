@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AdminsController;
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ProductsController;
@@ -24,6 +25,7 @@ Route::group([
             'categories' => CategoriesController::class,
             'products' => ProductsController::class,
             'roles' => RolesController::class,
+            'admins' => AdminsController::class,
         ]
     );
 

@@ -31,11 +31,11 @@ return [
         'title' => 'roles',
     ],
 
-    // [
-    //     'icon' => 'far fa-circle nav-icon',
-    //     'route' => 'dashboard.orders.index',
-    //     'active' => 'dashboard.orders.*',
-    //     'title' => 'orders',
-    //     'ability' => 'orders.view'
-    // ],
+    [
+        'icon' => 'far fa-circle nav-icon',
+        'route' => 'dashboard.admins.index',
+        'active' => 'dashboard.admins.*',
+        'title' => 'admins',
+        'ability' => 'admins.view'
+    ],
 ];

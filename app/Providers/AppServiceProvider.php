@@ -8,7 +8,9 @@ use App\Listeners\DeductProductQuantity;
 use App\Listeners\EmptyCart;
 use App\Listeners\SendOrderCreatedNotification;
 use App\Models\Admin;
+use App\Models\Role;
 use App\Models\User;
+use App\Policies\RolePolicy;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
@@ -41,6 +43,12 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         Event::listen(OrderCreated::class, EmptyCart::class);
         JsonResource::withoutWrapping();
+
+        Gate::before(function (Admin $admin) {
+            if ($admin->super_admin) {
+                return true;
+            }
+        });
 
         foreach ($this->app->make('abilities') as $code => $label) {
             Gate::define($code, function (User|Admin $user) use ($code) {
