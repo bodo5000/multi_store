@@ -18,7 +18,7 @@ class ProductsController extends Controller
         // SELECT * FROM products
         // SELECT * FROM categories WHERE  id IN (...)
         // SELECT * FROM products WHERE  id IN (...)
-        return view('dashboard.products.index', ['products' => Product::with(['category', 'store'])->paginate()]);
+        return view('dashboard.products.index', ['products' => Product::with(['category', 'store'])->orderByDesc('created_at')->paginate()]);
     }
 
     /**
@@ -26,7 +26,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.products.create', ['product' => new Product(), 'tags' => new Tag()]);
     }
 
     /**

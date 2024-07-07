@@ -21,6 +21,10 @@
         <a href="{{ route('dashboard.products.create') }}" class="btn btn-sm btn-outline-success">
             Create product
         </a>
+
+        <a href="{{ route('dashboard.products.import') }}" class="btn btn-sm btn-outline-info">
+            importProducts
+        </a>
     </div>
 
     <form action="{{ URL::current() }}" method="GET" class="d-flex justify-content-between mb-4">
